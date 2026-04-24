@@ -1,14 +1,17 @@
 package com.food.ordering.system.domain.valueobject;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-
 import java.util.Objects;
 
-@Getter
-@RequiredArgsConstructor(access = lombok.AccessLevel.PROTECTED)
 public abstract class BaseId<T> {
     private final T value;
+
+    protected BaseId(T value) {
+        this.value = value;
+    }
+
+    public T getValue() {
+        return value;
+    }
 
     @Override
     public boolean equals(Object o) {

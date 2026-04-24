@@ -1,14 +1,17 @@
 package com.food.ordering.system.domain.entity;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import java.util.Objects;
 
-@Setter
-@Getter
 public abstract class BaseEntity<ID> {
     private ID id;
+
+    public ID getId() {
+        return id;
+    }
+
+    public void setId(ID id) {
+        this.id = id;
+    }
 
     @Override
     public boolean equals(Object o) {
