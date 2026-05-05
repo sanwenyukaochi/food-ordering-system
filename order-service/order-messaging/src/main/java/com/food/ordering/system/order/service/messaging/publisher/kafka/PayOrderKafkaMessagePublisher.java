@@ -46,7 +46,7 @@ public class PayOrderKafkaMessagePublisher implements OrderPaidRestaurantRequest
                                     orderId,
                                     "RestaurantApprovalRequestAvroModel"));
 
-            log.info("RestaurantApprovalRequestAvroModel sent to kafka for order id: {}", orderId);
+            log.info("RestaurantApprovalRequestAvroModel sent to Kafka for order id: {}", orderId);
         } catch (Exception e) {
             log.error("Error while sending RestaurantApprovalRequestAvroModel message" +
                     " to Kafka with order id: {}, error: {}", orderId, e.getMessage());
