@@ -52,17 +52,17 @@ CREATE TABLE restaurant.restaurant_products
 
 ALTER TABLE restaurant.restaurant_products
     ADD CONSTRAINT "FK_RESTAURANT_ID" FOREIGN KEY (restaurant_id)
-        REFERENCES restaurant.restaurants (id) MATCH SIMPLE
-        ON UPDATE NO ACTION
-        ON DELETE RESTRICT
-        NOT VALID;
+    REFERENCES restaurant.restaurants (id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE RESTRICT
+    NOT VALID;
 
 ALTER TABLE restaurant.restaurant_products
     ADD CONSTRAINT "FK_PRODUCT_ID" FOREIGN KEY (product_id)
-        REFERENCES restaurant.products (id) MATCH SIMPLE
-        ON UPDATE NO ACTION
-        ON DELETE RESTRICT
-        NOT VALID;
+    REFERENCES restaurant.products (id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE RESTRICT
+    NOT VALID;
 
 DROP TYPE IF EXISTS outbox_status;
 CREATE TYPE outbox_status AS ENUM ('STARTED', 'COMPLETED', 'FAILED');
@@ -85,28 +85,28 @@ CREATE TABLE restaurant.order_outbox
 
 CREATE INDEX "restaurant_order_outbox_saga_status"
     ON "restaurant".order_outbox
-        (type, approval_status);
+    (type, approval_status);
 
 CREATE UNIQUE INDEX "restaurant_order_outbox_saga_id"
     ON "restaurant".order_outbox
-        (type, saga_id, approval_status, outbox_status);
+    (type, saga_id, approval_status, outbox_status);
 
 DROP MATERIALIZED VIEW IF EXISTS restaurant.order_restaurant_m_view;
 
 CREATE MATERIALIZED VIEW restaurant.order_restaurant_m_view
-    TABLESPACE pg_default
+TABLESPACE pg_default
 AS
-SELECT r.id AS restaurant_id,
-       r.name AS restaurant_name,
-       r.active AS restaurant_active,
-       p.id AS product_id,
-       p.name AS product_name,
-       p.price AS product_price,
-       p.available AS product_available
-FROM restaurant.restaurants r,
-     restaurant.products p,
-     restaurant.restaurant_products rp
-WHERE r.id = rp.restaurant_id AND p.id = rp.product_id
+ SELECT r.id AS restaurant_id,
+    r.name AS restaurant_name,
+    r.active AS restaurant_active,
+    p.id AS product_id,
+    p.name AS product_name,
+    p.price AS product_price,
+    p.available AS product_available
+   FROM restaurant.restaurants r,
+    restaurant.products p,
+    restaurant.restaurant_products rp
+  WHERE r.id = rp.restaurant_id AND p.id = rp.product_id
 WITH DATA;
 
 refresh materialized VIEW restaurant.order_restaurant_m_view;
@@ -114,17 +114,17 @@ refresh materialized VIEW restaurant.order_restaurant_m_view;
 DROP function IF EXISTS restaurant.refresh_order_restaurant_m_view;
 
 CREATE OR replace function restaurant.refresh_order_restaurant_m_view()
-    returns trigger
+returns trigger
 AS '
-    BEGIN
-        refresh materialized VIEW restaurant.order_restaurant_m_view;
-        return null;
-    END;
+BEGIN
+    refresh materialized VIEW restaurant.order_restaurant_m_view;
+    return null;
+END;
 '  LANGUAGE plpgsql;
 
 DROP trigger IF EXISTS refresh_order_restaurant_m_view ON restaurant.restaurant_products;
 
 CREATE trigger refresh_order_restaurant_m_view
-    after INSERT OR UPDATE OR DELETE OR truncate
-    ON restaurant.restaurant_products FOR each statement
+after INSERT OR UPDATE OR DELETE OR truncate
+ON restaurant.restaurant_products FOR each statement
 EXECUTE PROCEDURE restaurant.refresh_order_restaurant_m_view();

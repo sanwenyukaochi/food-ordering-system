@@ -2,194 +2,176 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <groupId>org.springframework.boot</groupId>
-        <version>2.6.7</version>
-        <relativePath/>
-    </parent>
     <modelVersion>4.0.0</modelVersion>
+
     <modules>
         <module>order-service</module>
         <module>common</module>
         <module>infrastructure</module>
-        <module>infrastructure/kafka</module>
         <module>customer-service</module>
         <module>payment-service</module>
         <module>restaurant-service</module>
     </modules>
 
+    <parent>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <groupId>org.springframework.boot</groupId>
+        <version>3.3.2</version>
+        <relativePath/>
+    </parent>
 
-    <groupId>com.food.order</groupId>
+    <groupId>com.food.ordering.system</groupId>
     <artifactId>food-ordering-system</artifactId>
     <version>1.0-SNAPSHOT</version>
-
     <packaging>pom</packaging>
 
     <properties>
-        <maven-compiler-plugin.version>3.9.0</maven-compiler-plugin.version>
-        <mockito.version>4.5.1</mockito.version>
-        <spring-kafka.version>2.8.2</spring-kafka.version>
-        <kavka-avro.serializer.version>7.0.1</kavka-avro.serializer.version>
-        <avro.version>1.11.0</avro.version>
+        <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
+        <mockito.version>5.12.0</mockito.version>
+        <spring-kafka.version>3.2.2</spring-kafka.version>
+        <kafka-avro-serializer.version>7.7.0</kafka-avro-serializer.version>
+        <avro.version>1.12.0</avro.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
-
             <dependency>
-                <groupId>com.food.order</groupId>
-                <artifactId>order-core-domain</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.food.order</groupId>
-                <artifactId>outbox</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.food.order</groupId>
-                <artifactId>payment-domain</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.food.order</groupId>
-                <artifactId>order-app</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.food.order</groupId>
-                <artifactId>payment-application-service</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.food.order</groupId>
+                <groupId>com.food.ordering.system</groupId>
                 <artifactId>saga</artifactId>
                 <version>${project.version}</version>
             </dependency>
-
-
             <dependency>
-                <groupId>com.food.order</groupId>
-                <artifactId>payment-domain-core</artifactId>
+                <groupId>com.food.ordering.system</groupId>
+                <artifactId>outbox</artifactId>
                 <version>${project.version}</version>
             </dependency>
-
             <dependency>
-                <groupId>com.food.order</groupId>
-                <artifactId>payment-dataaccess</artifactId>
+                <groupId>com.food.ordering.system</groupId>
+                <artifactId>order-domain-core</artifactId>
                 <version>${project.version}</version>
             </dependency>
-
             <dependency>
-                <groupId>com.food.order</groupId>
-                <artifactId>payment-messaging</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
-
-            <dependency>
-                <groupId>com.food.order</groupId>
+                <groupId>com.food.ordering.system</groupId>
                 <artifactId>order-application-service</artifactId>
                 <version>${project.version}</version>
             </dependency>
-
             <dependency>
-                <groupId>com.food.order</groupId>
+                <groupId>com.food.ordering.system</groupId>
                 <artifactId>order-application</artifactId>
                 <version>${project.version}</version>
             </dependency>
-
             <dependency>
-                <groupId>com.food.order</groupId>
-                <artifactId>common-application</artifactId>
+                <groupId>com.food.ordering.system</groupId>
+                <artifactId>order-dataaccess</artifactId>
                 <version>${project.version}</version>
             </dependency>
-
             <dependency>
-                <groupId>com.food.order</groupId>
-                <artifactId>kafka-producer</artifactId>
+                <groupId>com.food.ordering.system</groupId>
+                <artifactId>order-messaging</artifactId>
                 <version>${project.version}</version>
             </dependency>
-
             <dependency>
-                <groupId>com.food.order</groupId>
+                <groupId>com.food.ordering.system</groupId>
+                <artifactId>payment-domain-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.food.ordering.system</groupId>
+                <artifactId>payment-application-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.food.ordering.system</groupId>
+                <artifactId>payment-dataaccess</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.food.ordering.system</groupId>
+                <artifactId>payment-messaging</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.food.ordering.system</groupId>
+                <artifactId>restaurant-domain-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.food.ordering.system</groupId>
                 <artifactId>restaurant-application-service</artifactId>
                 <version>${project.version}</version>
             </dependency>
-
             <dependency>
-                <groupId>com.food.order</groupId>
-                <artifactId>common-data-access</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.food.order</groupId>
+                <groupId>com.food.ordering.system</groupId>
                 <artifactId>restaurant-dataaccess</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.food.order</groupId>
+                <groupId>com.food.ordering.system</groupId>
                 <artifactId>restaurant-messaging</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.food.order</groupId>
-                <artifactId>restaurant-core-domain</artifactId>
+                <groupId>com.food.ordering.system</groupId>
+                <artifactId>customer-domain-core</artifactId>
                 <version>${project.version}</version>
             </dependency>
-
-
             <dependency>
-                <groupId>com.food.order</groupId>
-                <artifactId>restaurant-domain</artifactId>
+                <groupId>com.food.ordering.system</groupId>
+                <artifactId>customer-application-service</artifactId>
                 <version>${project.version}</version>
             </dependency>
-
-
             <dependency>
-                <groupId>com.food.order</groupId>
-                <artifactId>kafka-consumer</artifactId>
+                <groupId>com.food.ordering.system</groupId>
+                <artifactId>customer-application</artifactId>
                 <version>${project.version}</version>
             </dependency>
-
             <dependency>
-                <groupId>com.food.order</groupId>
-                <artifactId>kafka-model</artifactId>
+                <groupId>com.food.ordering.system</groupId>
+                <artifactId>customer-dataaccess</artifactId>
                 <version>${project.version}</version>
             </dependency>
-
             <dependency>
-                <groupId>com.food.order</groupId>
-                <artifactId>kafka-config</artifactId>
+                <groupId>com.food.ordering.system</groupId>
+                <artifactId>customer-messaging</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.food.order</groupId>
-                <artifactId>order-data-access</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.food.order</groupId>
+                <groupId>com.food.ordering.system</groupId>
                 <artifactId>common-domain</artifactId>
                 <version>${project.version}</version>
             </dependency>
-
             <dependency>
-                <groupId>com.food.order</groupId>
-                <artifactId>order-messaging</artifactId>
+                <groupId>com.food.ordering.system</groupId>
+                <artifactId>common-application</artifactId>
                 <version>${project.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>com.food.ordering.system</groupId>
+                <artifactId>common-dataaccess</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.food.ordering.system</groupId>
+                <artifactId>kafka-producer</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.food.ordering.system</groupId>
+                <artifactId>kafka-consumer</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.food.ordering.system</groupId>
+                <artifactId>kafka-model</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.food.ordering.system</groupId>
+                <artifactId>kafka-config-data</artifactId>
+                <version>${project.version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-core</artifactId>
@@ -205,13 +187,11 @@
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-logging</artifactId>
         </dependency>
     </dependencies>
-
 
     <build>
         <plugins>
@@ -221,24 +201,6 @@
                 <version>${maven-compiler-plugin.version}</version>
                 <configuration>
                     <release>17</release>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>com.github.ferstl</groupId>
-                <artifactId>depgraph-maven-plugin</artifactId>
-                <version>4.0.1</version>
-                <configuration>
-                    <scope>compile</scope>
-                    <graphFormat>puml</graphFormat>
-                    <createImage>true</createImage>
-                    <excludes>
-                        <exclude>org.slf4j:slf4j-api</exclude>
-                        <exclude>com.google.guava:guava</exclude>
-                        <exclude>io.vavr:vavr</exclude>
-                    </excludes>
-                    <transitiveExcludes>
-                        <transitiveExclude>*</transitiveExclude>
-                    </transitiveExcludes>
                 </configuration>
             </plugin>
         </plugins>

@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>kafka</artifactId>
-        <groupId>com.food.order</groupId>
+        <groupId>com.food.ordering.system</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -17,7 +17,6 @@
             <artifactId>avro</artifactId>
         </dependency>
     </dependencies>
-
 
     <build>
         <plugins>
@@ -36,15 +35,14 @@
                             <goal>schema</goal>
                         </goals>
                         <configuration>
-                            <sourceDirectory>${project.basedir}/src/main/avro/</sourceDirectory>
-                            <outputDirectory>${project.build.directory}/generated-sources/avro/</outputDirectory>
+                            <sourceDirectory>src/main/resources/avro</sourceDirectory>
+                            <outputDirectory>src/main/java</outputDirectory>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
         </plugins>
     </build>
-
 
 
 </project>
