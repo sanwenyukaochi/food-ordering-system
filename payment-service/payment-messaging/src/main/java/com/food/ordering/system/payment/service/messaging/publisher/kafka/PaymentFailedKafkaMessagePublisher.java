@@ -49,10 +49,10 @@ public class PaymentFailedKafkaMessagePublisher implements PaymentFailedMessageP
                             orderId,
                             "PaymentResponseAvroModel"));
 
-            log.info("PaymentResponseAvroModel sent to Kafka for order id: {}", orderId);
+            log.info("PaymentResponseAvroModel sent to kafka for order id: {}", orderId);
         } catch (Exception e) {
             log.error("Error while sending PaymentResponseAvroModel message" +
-                    " to Kafka with order id: {}, error: {}", orderId, e.getMessage());
+                    " to kafka with order id: {}, error: {}", orderId, e.getMessage());
         }
     }
 }

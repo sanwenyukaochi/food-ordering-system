@@ -73,7 +73,7 @@ public class Product extends org.apache.avro.specific.SpecificRecordBase impleme
     return DECODER.decode(b);
   }
 
-  private java.lang.String id;
+  private String id;
   private int quantity;
 
   /**
@@ -88,7 +88,7 @@ public class Product extends org.apache.avro.specific.SpecificRecordBase impleme
    * @param id The new value for id
    * @param quantity The new value for quantity
    */
-  public Product(java.lang.String id, java.lang.Integer quantity) {
+  public Product(String id, Integer quantity) {
     this.id = id;
     this.quantity = quantity;
   }
