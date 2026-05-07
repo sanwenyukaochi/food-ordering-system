@@ -61,11 +61,10 @@ ALTER TABLE "order".order_address
     NOT VALID;
 
 DROP TYPE IF EXISTS saga_status;
-CREATE TYPE saga_status AS ENUM ('STARTED','FAILED','SUCCEEDED','PROCESSING', 'COMPENSATING','COMPENSATED');
+CREATE TYPE saga_status AS ENUM ('STARTED', 'FAILED', 'SUCCEEDED', 'PROCESSING', 'COMPENSATING', 'COMPENSATED');
 
 DROP TYPE IF EXISTS outbox_status;
-CREATE TYPE outbox_status AS ENUM ('STARTED','COMPLETED','FAILED');
-
+CREATE TYPE outbox_status AS ENUM ('STARTED', 'COMPLETED', 'FAILED');
 
 DROP TABLE IF EXISTS "order".payment_outbox CASCADE;
 
@@ -86,12 +85,11 @@ CREATE TABLE "order".payment_outbox
 
 CREATE INDEX "payment_outbox_saga_status"
     ON "order".payment_outbox
-        (type, outbox_status, saga_status);
+    (type, outbox_status, saga_status);
 
-CREATE UNIQUE INDEX "payment_outbox_saga_id"
-    ON "order".payment_outbox
-        (type, saga_id, saga_status);
-
+--CREATE UNIQUE INDEX "payment_outbox_saga_id"
+--    ON "order".payment_outbox
+--    (type, saga_id, saga_status);
 
 DROP TABLE IF EXISTS "order".restaurant_approval_outbox CASCADE;
 
@@ -112,8 +110,9 @@ CREATE TABLE "order".restaurant_approval_outbox
 
 CREATE INDEX "restaurant_approval_outbox_saga_status"
     ON "order".restaurant_approval_outbox
-        (type, outbox_status, saga_status);
+    (type, outbox_status, saga_status);
 
-CREATE UNIQUE INDEX "restaurant_approval_outbox_saga_id"
-    ON "order".restaurant_approval_outbox
-        (type, saga_id, saga_status);
+--CREATE UNIQUE INDEX "restaurant_approval_outbox_saga_id"
+--    ON "order".restaurant_approval_outbox
+--    (type, saga_id, saga_status);
+
