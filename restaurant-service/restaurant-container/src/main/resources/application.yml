@@ -6,8 +6,8 @@ logging:
     com.food.ordering.system: DEBUG
 
 restaurant-service:
-  restaurant-approval-request-topic-name: restaurant-approval-request
-  restaurant-approval-response-topic-name: restaurant-approval-response
+  restaurant-approval-request-topic-name: restaurant-approval-request-value
+  restaurant-approval-response-topic-name: restaurant-approval-response-value
   outbox-scheduler-fixed-rate: 10000
   outbox-scheduler-initial-delay: 10000
 
@@ -22,12 +22,14 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres?currentSchema=restaurant&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified
     username: postgres
-    password: admin
+    password: postgres
     driver-class-name: org.postgresql.Driver
-    platform: postgres
-    schema: classpath:init-schema.sql
-    data: classpath:init-data.sql
-    initialization-mode: always
+  sql:
+    init:
+      platform: postgres
+      mode: always
+      data-locations: classpath:init-data.sql
+      schema-locations: classpath:init-schema.sql
 
 kafka-config:
   bootstrap-servers: localhost:19092, localhost:29092, localhost:39092
