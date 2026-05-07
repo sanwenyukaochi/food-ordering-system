@@ -1,6 +1,6 @@
-package com.food.order.system.common.data.access.repository;
+package com.food.order.system.common.data.access.restaurant.repository;
 
-import com.food.order.system.common.data.access.entity.RestaurantEntity;
+import com.food.order.system.common.data.access.restaurant.entity.RestaurantEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

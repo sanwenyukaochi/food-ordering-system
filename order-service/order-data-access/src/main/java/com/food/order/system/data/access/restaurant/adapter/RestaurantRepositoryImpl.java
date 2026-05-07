@@ -1,6 +1,6 @@
 package com.food.order.system.data.access.restaurant.adapter;
 
-import com.food.order.system.common.data.access.repository.RestaurantJpaRepository;
+import com.food.order.system.common.data.access.restaurant.repository.RestaurantJpaRepository;
 import com.food.order.system.data.access.restaurant.mapper.RestaurantDataAccessMapper;
 import com.food.order.system.domain.entity.Restaurant;
 import com.food.order.system.ports.output.repository.RestaurantRepository;
@@ -18,9 +18,9 @@ public class RestaurantRepositoryImpl implements RestaurantRepository {
 
     @Override
     public Optional<Restaurant> findRestaurantInformation(Restaurant restaurant) {
-        return restaurantJpaRepository.findByRestaurantIdAndProductIdIn
-                        (restaurant.getId().getValue(),
-                                restaurantDataAccessMapper.restaurantToRestaurantProducts(restaurant))
-                .map(restaurantDataAccessMapper::restaurantEntityToRestaurant);
+        return restaurantJpaRepository.findByRestaurantIdAndProductIdIn(
+                restaurant.getId().getValue(),
+                restaurantDataAccessMapper.restaurantToRestaurantProducts(restaurant)
+        ).map(restaurantDataAccessMapper::restaurantEntityToRestaurant);
     }
 }

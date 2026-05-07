@@ -7,14 +7,14 @@ public class StreetAddress {
 
     private final UUID id;
     private final String street;
-    private final String city;
     private final String postalCode;
+    private final String city;
 
-    public StreetAddress(UUID id, String street, String city, String postalCode) {
+    public StreetAddress(UUID id, String street, String postalCode, String city) {
         this.id = id;
         this.street = street;
-        this.city = city;
         this.postalCode = postalCode;
+        this.city = city;
     }
 
     public UUID getId() {

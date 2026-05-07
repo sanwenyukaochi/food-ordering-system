@@ -1,4 +1,4 @@
-package com.food.order.system.common.data.access.entity;
+package com.food.order.system.common.data.access.restaurant.entity;
 
 
 import lombok.*;
@@ -22,18 +22,12 @@ public class RestaurantEntity {
 
     @Id
     private UUID restaurantId;
-
     @Id
     private UUID productId;
-
     private String restaurantName;
-
     private Boolean restaurantActive;
-
     private String productName;
-
     private BigDecimal productPrice;
-
     private Boolean productAvailable;
 
     @Override

@@ -6,6 +6,7 @@ import org.hibernate.annotations.DynamicUpdate;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.UUID;
+
 @Entity
 @DynamicUpdate
 @Table(name = "order_items")
@@ -25,11 +26,8 @@ public class OrderItemEntity {
     private OrderEntity orderEntity;
 
     private UUID productId;
-
     private Integer quantity;
-
     private BigDecimal price;
-
     private BigDecimal subTotal;
 
     @Override
