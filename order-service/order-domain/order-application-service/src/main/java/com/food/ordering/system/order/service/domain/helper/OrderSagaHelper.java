@@ -1,4 +1,4 @@
-package com.food.ordering.system.order.service.domain;
+package com.food.ordering.system.order.service.domain.helper;
 
 import com.food.ordering.system.domain.valueobject.OrderId;
 import com.food.ordering.system.domain.valueobject.OrderStatus;
@@ -22,7 +22,7 @@ public class OrderSagaHelper {
         this.orderRepository = orderRepository;
     }
 
-    Order findOrder(String orderId) {
+    public Order findOrder(String orderId) {
         Optional<Order> orderResponse = orderRepository.findById(new OrderId(UUID.fromString(orderId)));
         if (orderResponse.isEmpty()) {
             log.error("Order with id: {} could not be found!", orderId);
@@ -31,11 +31,11 @@ public class OrderSagaHelper {
         return orderResponse.get();
     }
 
-    void saveOrder(Order order) {
+    public void saveOrder(Order order) {
         orderRepository.save(order);
     }
 
-    SagaStatus orderStatusToSagaStatus(OrderStatus orderStatus) {
+    public SagaStatus orderStatusToSagaStatus(OrderStatus orderStatus) {
         return switch (orderStatus) {
             case PAID -> SagaStatus.PROCESSING;
             case APPROVED -> SagaStatus.SUCCEEDED;
